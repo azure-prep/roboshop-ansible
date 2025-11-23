@@ -5,12 +5,6 @@
   ansible.builtin.dnf:
     name: nginx
 
-- name: Start nginx service
-  ansible.builtin.systemd_service:
-    state: started
-    enabled: true
-    name: nginx
-
 - name: Remove the default content that web server is serving.
   ansible.builtin.file:
     path: /usr/share/nginx/html/*
@@ -24,6 +18,7 @@
 
 - name: Restart Nginx Service to load the changes of the configuration.
   ansible.builtin.systemd_service:
-    state: restarted
+    state: started
+    enabled: true
     name: nginx
 
