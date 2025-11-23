@@ -1,2 +1,3 @@
 - name: Run a command using a templated variable (always use quote filter to avoid injection)
-  ansible.builtin.shell: ls
+  ansible.builtin.debug:
+    msg: hello frontend
