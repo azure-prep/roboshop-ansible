@@ -1,4 +1,2 @@
-- name: Disable nginx and enable nginx 1.24
-  ansible:
-    builtin:
-      shell: dnf module disable nginx -y && dnf module enable nginx:1.24 -y
+- name: Run a command using a templated variable (always use quote filter to avoid injection)
+  ansible.builtin.shell: ls
