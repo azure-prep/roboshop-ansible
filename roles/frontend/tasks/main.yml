@@ -5,3 +5,25 @@
   ansible.builtin.dnf:
     name: nginx
 
+- name: Start nginx service
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    name: nginx
+
+- name: Remove the default content that web server is serving.
+  ansible.builtin.file:
+    path: /usr/share/nginx/html/*
+    state: absent
+
+- name: Download and extract the frontend content
+  ansible.builtin.unarchive:
+    src:  https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+    dest: /usr/share/nginx/html/
+    remote_src: yes
+
+- name: Restart Nginx Service to load the changes of the configuration.
+  ansible.builtin.systemd_service:
+    state: restarted
+    name: nginx
+
