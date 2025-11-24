@@ -14,3 +14,8 @@
 
 - name: Load master data
   ansible.builtin.shell: mongosh --host mongodb-dev.azdevopsb1.online </app/db/master-data.js
+
+- name: Start systemd service
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd_setup.yaml

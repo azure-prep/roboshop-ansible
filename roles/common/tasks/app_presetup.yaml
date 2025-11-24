@@ -5,6 +5,7 @@
 - name: Lets setup an app directory.
   ansible.builtin.file:
     path: /app
+    state: present
 
 - name: Download and extract the {{ app_name }} content
   ansible.builtin.unarchive:
