@@ -1,0 +1,15 @@
+- name: Install NodeJS, By default NodeJS 16 is available, We would like to enable 20 version and install list.
+  ansible.builtin.shell: dnf module disable nodejs -y && dnf module enable nodejs:20 -y
+
+- name: Install nodejs
+  ansible.builtin.dnf:
+    name: nodejs
+
+- name: Include task list in play
+  ansible.builtin.include_tasks:
+    file: app_presetup.yaml
+
+- name: Change the working directory to /app
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app

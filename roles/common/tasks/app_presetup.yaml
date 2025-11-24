@@ -1,0 +1,13 @@
+- name: Add application User
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Lets setup an app directory.
+  ansible.builtin.file:
+    path: /app
+
+- name: Download and extract the {{ app_name }} content
+  ansible.builtin.unarchive:
+    src:  https://roboshop-artifacts.s3.amazonaws.com/{{ app_name }}-v3.zip
+    dest: /app
+    remote_src: yes

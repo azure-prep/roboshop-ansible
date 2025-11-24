@@ -1,0 +1,21 @@
+- name: Install rabbitmq-server
+  ansible.builtin.dnf:
+    name: rabbitmq-server
+
+- name: Start rabbitmq-server
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    name: rabbitmq-server
+
+- name: |-
+    Add user to server and assign full access control on / vhost.
+    The user might have permission rules for other vhost but you don't care.
+  community.rabbitmq.rabbitmq_user:
+    user: roboshop
+    password: roboshop123
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present

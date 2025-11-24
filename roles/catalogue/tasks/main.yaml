@@ -1,0 +1,16 @@
+- name: Set up nodejs
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: nodejs
+
+- name: Copy mongo.repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: Install mongodb-mongosh
+  ansible.builtin.dnf:
+    name: mongodb-mongosh
+
+- name: Load master data
+  ansible.builtin.shell: mongosh --host mongodb-dev.azdevopsb1.online </app/db/master-data.js

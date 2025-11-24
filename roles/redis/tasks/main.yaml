@@ -1,0 +1,24 @@
+- name: Install redis, By default redis 6 is available, We would like to enable 7 version and install list.
+  ansible.builtin.shell: dnf module disable redis -y && dnf module enable redis:7 -y
+
+- name: Install Redis
+  ansible.builtin.dnf:
+    name: redis
+
+- name: Replace old hostname with new hostname (requires Ansible >= 2.4)
+  ansible.builtin.replace:
+    path: /etc/redis/redis.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Update protected-mode from yes to no in /etc/redis/redis.conf
+  ansible.builtin.replace:
+    path: /etc/redis/redis.conf
+    regexp: 'protected-mode yes'
+    replace: 'protected-mode no'
+
+- name: Start & Enable Redis Service
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    name: nginx
