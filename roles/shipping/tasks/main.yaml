@@ -1,0 +1,9 @@
+- name: Set up java
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: java
+
+- name: Start systemd service
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd_setup.yaml

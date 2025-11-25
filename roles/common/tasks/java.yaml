@@ -1,0 +1,12 @@
+- name: Install maven
+  ansible.builtin.dnf:
+    name: maven
+
+- name: Include task list in play
+  ansible.builtin.include_tasks:
+    file: app_presetup.yaml
+
+- name: Change the working directory to /app
+  ansible.builtin.shell: mvn clean package; mv target/{{ app_name }}-1.0.jar {{ app_name }}.jar
+  args:
+    chdir: /app
