@@ -16,9 +16,14 @@
     dest: /usr/share/nginx/html/
     remote_src: yes
 
+- name: Setup SystemD Catalogue Service
+  ansible.builtin.copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+
 - name: Restart Nginx Service to load the changes of the configuration.
   ansible.builtin.systemd_service:
-    state: started
+    state: restarted
     enabled: true
     name: nginx
 
