@@ -7,14 +7,19 @@
   ansible.builtin.dnf:
     name: mongodb-org
 
+- name: Start the service to make the changes effected.
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    name: mongod
+
 - name: Replace nold hostname with new hostname (requires Ansible >= 2.4)
   ansible.builtin.replace:
     path: /etc/mongod.conf
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
 
-- name: Restart the service to make the changes effected.
-  ansible.builtin.systemd_service:
-    state: started
-    enabled: true
+- name: Restart a systemd service
+  ansible.builtin.systemd:
     name: mongod
+    state: restarted
