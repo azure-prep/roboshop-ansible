@@ -1,0 +1,9 @@
+- name: Set up payment
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: python
+
+- name: Start systemd service
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd_setup.yaml
