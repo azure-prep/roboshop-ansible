@@ -17,8 +17,8 @@
     Add user to server and assign full access control on / vhost.
     The user might have permission rules for other vhost but you don't care.
   community.rabbitmq.rabbitmq_user:
-    user: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:AMQP_USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
-    password: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:AMQP_PASS token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+    user: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:AMQP_USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}"
+    password: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:AMQP_PASS token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}"
     vhost: /
     configure_priv: .*
     read_priv: .*
