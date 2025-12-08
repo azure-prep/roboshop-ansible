@@ -1,5 +1,5 @@
 default:
-	ansible-playbook -i ${app_name}-dev.azdevopsb1.online, -e app_name=${app_name} -e ansible_user=azuser -e ansible_password=Devops@12345 roboshop.yml
+	ansible-playbook -i ${app_name}-dev.azdevopsb1.online, -e app_name=${app_name} -e ansible_user=azuser -e ansible_password=Devops@12345 -e token=hvs.OEKXofRTU1btspGwcPZdAuHc roboshop.yml
 
 all:
 	make app_name=mongodb
