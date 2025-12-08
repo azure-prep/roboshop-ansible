@@ -9,4 +9,4 @@
     name: mysqld
 
 - name: Change the default root password in order to start using the database service
-  ansible.builtin.shell: mysql_secure_installation --set-root-pass RoboShop@1
+  ansible.builtin.shell: mysql_secure_installation --set-root-pass {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/mysql:PASSWORD token={{ token }}
