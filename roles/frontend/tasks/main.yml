@@ -16,10 +16,6 @@
     dest: /usr/share/nginx/html/
     remote_src: yes
 
-- name: Preview template render
-  debug:
-    msg: "{{ lookup('template', 'nginx.conf') }}"
-
 - name: Setup SystemD nginx Service
   ansible.builtin.copy:
     src: nginx.conf
