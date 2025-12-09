@@ -9,9 +9,9 @@
 
 - name: Load Schema, Schema in database is the structure to it like what tables to be created and their necessary application layouts
   ansible.builtin.shell: |
-     mysql -h mysql-dev.azdevopsb1.online -u{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/mysql:USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} -p{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/mysql:PASSWORD token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} < /app/db/schema.sql
-     mysql -h mysql-dev.azdevopsb1.online -u{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/mysql:USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} -p{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/mysql:PASSWORD token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} < /app/db/app-user.sql
-     mysql -h mysql-dev.azdevopsb1.online -u{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/mysql:USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} -p{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/mysql:PASSWORD token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} < /app/db/master-data.sql
+     mysql -h mysql-dev.azdevopsb1.online -u{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/mysql:USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} -p{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/mysql:PASSWORD token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} < /app/db/schema.sql
+     mysql -h mysql-dev.azdevopsb1.online -u{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/mysql:USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} -p{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/mysql:PASSWORD token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} < /app/db/app-user.sql
+     mysql -h mysql-dev.azdevopsb1.online -u{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/mysql:USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} -p{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/mysql:PASSWORD token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }} < /app/db/master-data.sql
 
 - name: Start systemd service
   ansible.builtin.include_role:
