@@ -1,0 +1,35 @@
+- name: Start shipping  container
+  community.docker.docker_container:
+    name: { { role_name } }
+    image: public.ecr.aws/w8x4g9h7/roboshop-v3/shipping
+    state: started
+    ports:
+      # Publish container port 9000 as host port 8080
+      - "8080:8080"
+    env:
+      CART_ENDPOINT: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:CART_ENDPOINT token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      # Values which might be parsed as numbers, booleans or other types by the YAML parser need to be quoted
+      DB_HOST: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:DB_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+
+- name: Start shipping  container
+  community.docker.docker_container:
+    name: { { role_name } }
+    loop:
+      - app-user
+      - schema
+      - master-data
+    image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
+    state: started
+    ports:
+      # Publish container port 9000 as host port 8080
+      - "8080:8080"
+    env:
+      DB_TYPE: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:DB_TYPE token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      # Values which might be parsed as numbers, booleans or other types by the YAML parser need to be quoted
+      APP_GIT_URL: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:APP_GIT_URL token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      DB_HOST: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:DB_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      DB_USER: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:DB_USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      DB_PASS: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:DB_PASS token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      SCHEMA_FILE: db/{{ item }}.sql
+
+
