@@ -12,11 +12,11 @@
       # Publish container port 9000 as host port 8080
       - "8080:8080"
     env:
-      CART_HOST: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:CART_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      CART_HOST: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:CART_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
       # Values which might be parsed as numbers, booleans or other types by the YAML parser need to be quoted
-      CART_PORT: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:CART_PORT token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
-      USER_HOST: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:USER_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
-      USER_PORT: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:USER_PORT token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
-      AMQP_HOST: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:AMQP_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
-      AMQP_USER: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:AMQP_USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
-      AMQP_PASS: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{app_name}}:AMQP_PASS token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      CART_PORT: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:CART_PORT token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      USER_HOST: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:USER_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      USER_PORT: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:USER_PORT token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      AMQP_HOST: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:AMQP_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      AMQP_USER: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:AMQP_USER token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
+      AMQP_PASS: {{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/payment:AMQP_PASS token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}
