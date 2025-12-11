@@ -17,12 +17,12 @@
       DB_HOST: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/shipping:DB_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}"
 
 - name: Start shipping  container
+  loop:
+    - app-user
+    - schema
+    - master-data
   community.docker.docker_container:
     name: shipping-{{ item }}
-    loop:
-      - app-user
-      - schema
-      - master-data
     image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
     state: started
     env:
