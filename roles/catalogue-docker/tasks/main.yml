@@ -18,12 +18,9 @@
 
 - name: Catalogue requires master-data to be loaded.
   community.docker.docker_container:
-    name: catalogue
+    name: catalogue-schema
     image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
     state: started
-    ports:
-      # Publish container port 9000 as host port 8080
-      - "8080:8080"
     env:
       DB_TYPE: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/catalogue:DB_TYPE token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}"
       DB_HOST: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/catalogue:DB_HOST token={{ token }} url=http://vault-int.azdevopsb1.online:8200') }}"
